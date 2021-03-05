@@ -1,15 +1,19 @@
 from sklearn import linear_model
 import numpy as np
 
-dataset = np.loadtxt('Data/train.csv',delimiter=",",comments="#")
-print(dataset[1:2,:])
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
+#getting the data from the csv files
+def get_data(name,x_start,x_end):
+
+    dataset = np.loadtxt(name,delimiter=",",skiprows=1)
+    return dataset[:,x_start:x_end]
 
 
-# Press the green button in the gutter to run the script.
+
+
 if __name__ == '__main__':
-    print_hi('Anmo')
+    x = get_data('Data/train.csv',2,12)
+    y = get_data('Data/train.csv',1,2)
+    reg = linear_model.LinearRegression()
+    reg.fit(x,y)
+    print(reg.coef_)
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
